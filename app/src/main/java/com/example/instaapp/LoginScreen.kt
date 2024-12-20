@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -57,8 +58,45 @@ fun LoginScreen(){
     ){
         Header(Modifier.align(Alignment.TopEnd))
         Body(Modifier.align(Alignment.Center))
-        //Footer(Modifier.align(Alignment.BottomCenter))
+        Footer(Modifier.align(Alignment.BottomCenter))
     }
+}
+
+@Composable
+fun Footer(modifier: Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Divider(
+            Modifier
+                .height(1.dp)
+                .fillMaxWidth()
+                .background(Color.Gray)
+        )
+        Spacer(modifier = Modifier.size(16.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(
+                text = "Dont have an account",
+                fontSize = 12.sp,
+                color = Color(0xFF4EA8E9),
+                modifier = Modifier.padding(horizontal = 8.dp)
+            )
+            Text(
+                text = "Sign up",
+                fontSize = 12.sp,
+                color = Color(0xFF4EA8E9),
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable { createAccount() }
+            )
+        }
+    }
+}
+
+fun createAccount() {
 }
 
 @Composable
@@ -78,13 +116,42 @@ fun Body(modifier: Modifier) {
         LoginButton(isLoginEnable)
         Spacer(modifier = Modifier.size(16.dp))
         LoginDivisor()
-        //LoginSocial()
+        Spacer(modifier = Modifier.size(32.dp))
+        LoginSocial()
     }
 }
 
 @Composable
+fun LoginSocial() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.fb),
+            contentDescription = "FB",
+            modifier = Modifier.size(16.dp)
+        )
+        Text(
+            text = "Continue as Daniela",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4EA8E9 ),
+            modifier = Modifier.padding(horizontal = 8.dp)
+                .clickable { checkSocialLogin() }
+        )
+    }
+}
+
+fun checkSocialLogin() {
+}
+
+@Composable
 fun LoginDivisor() {
-    Row(){
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ){
         Divider(Modifier
             .height(1.dp)
             .weight(1f)
@@ -114,8 +181,8 @@ fun LoginButton(loginEnable: Boolean) {
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
-            containerColor = Color.White,
-            disabledContentColor = Color(0xFF4EA8E9),
+            disabledContentColor = Color.White,
+            containerColor = Color(0xFF4EA8E9),
             disabledContainerColor = Color(0xFF4EA8E9)
         )
     ){
